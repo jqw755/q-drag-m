@@ -1,0 +1,42 @@
+import { fileURLToPath, URL } from "node:url"
+
+import { defineConfig } from "vite"
+import vue from "@vitejs/plugin-vue"
+import * as path from "path"
+
+import AutoImport from "unplugin-auto-import/vite"
+import Components from "unplugin-vue-components/vite"
+import { ElementPlusResolver, VantResolver } from "unplugin-vue-components/resolvers"
+
+// https://vitejs.dev/config/
+export default defineConfig({
+  plugins: [
+    vue(),
+    AutoImport({
+      resolvers: [ElementPlusResolver()],
+    }),
+    Components({
+      resolvers: [ElementPlusResolver(), VantResolver()],
+    }),
+  ],
+  resolve: {
+    alias: {
+      "@": fileURLToPath(new URL("./src", import.meta.url)),
+    },
+  },
+  build: {
+    terserOptions: {
+      compress: {
+        drop_console: true, // 生产环境去除console
+        drop_debugger: true, // 生产环境去除debugger
+      },
+    },
+    rollupOptions: {
+      // 多页面配置
+      input: {
+        main: path.resolve(__dirname, "index.html"),
+        // preview: path.resolve(__dirname, "preview/index.html"),
+      },
+    },
+  },
+})

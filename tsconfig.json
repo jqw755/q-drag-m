@@ -1,0 +1,27 @@
+{
+  "include": ["./src/**/*"],
+  "files": [],
+  "references": [
+    {
+      "path": "./tsconfig.node.json"
+    },
+    {
+      "path": "./tsconfig.app.json"
+    }
+  ],
+  "compilerOptions": {
+    "baseUrl": "./",
+    "types": ["element-plus/global"],
+    "outDir": "./built/",
+    "sourceMap": true,
+    "strict": true,
+    "noImplicitReturns": true,
+    "module": "es2015",
+    "moduleResolution": "node",
+    "target": "es5",
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  },
+  "jsx": "preserve"
+}
