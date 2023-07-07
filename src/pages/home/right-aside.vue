@@ -18,11 +18,20 @@ const props = defineProps({
 })
 </script>
 
+<style>
+.el-form {
+  .el-form-item {
+    .el-form-item__content {
+      justify-content: flex-end;
+    }
+  }
+}
+</style>
 <style scoped lang="scss">
 .layout-right__aside {
   width: 400px;
   height: 100%;
-  padding: 0 20px;
+  padding: 0 24px 0 20px;
   border-left: 1px solid $border-color;
   background-color: #fff;
   .component-title {

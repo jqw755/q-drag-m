@@ -2,6 +2,7 @@
   <div :class="{ 'is-topping': data.topping }">
     <van-search
       v-model="value"
+      :clearable="false"
       :placeholder="data.placeholder"
       :input-align="data.align"
       :background="data.background"

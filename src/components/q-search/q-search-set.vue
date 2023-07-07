@@ -4,7 +4,7 @@
     <!-- 属性表单 -->
     <el-form :model="data" label-position="right" label-width="80px">
       <el-form-item label="输入占位">
-        <el-input v-model="data.placeholder" style="width: 214px" />
+        <el-input class="w-214" v-model="data.placeholder" clearable />
       </el-form-item>
       <el-form-item label="内容对齐">
         <el-select v-model="data.align">
@@ -54,13 +54,8 @@ const predefineColors = ref([
   "#c7158577",
 ])
 </script>
-
 <style>
-:deep(.el-form) {
-  .el-form-item {
-    .el-form-item__content {
-      text-align: right;
-    }
-  }
+.w-214 {
+  width: 214px;
 }
 </style>
