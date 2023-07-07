@@ -1,11 +1,22 @@
 <template>
   <div class="layout-right__aside">
     <p class="component-title">搜索框</p>
+
+    <component :is="data.setName" :data="data.style"> </component>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue"
+import { ref, PropType } from "vue"
+import { ICom } from "@/utils/type"
+
+/* props */
+const props = defineProps({
+  data: {
+    type: Object as PropType<ICom>,
+    default: {},
+  },
+})
 </script>
 
 <style scoped lang="scss">

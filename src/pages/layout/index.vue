@@ -10,22 +10,31 @@
 
       <!-- 组件集合渲染区域 -->
       <div class="layout-middle__content">
-        <render-container />
+        <render-container @setComData="setComData" />
       </div>
 
       <!-- 组件对应的属性编辑区域 -->
-      <right-aside />
+      <right-aside :data="curComponentData" />
     </div>
   </section>
 </template>
 
 <script setup lang="ts">
+import { ref } from "vue"
 import headerNav from "./header/top.vue"
 import leftAside from "../home/left-aside.vue"
 import rightAside from "../home/right-aside.vue"
 import renderContainer from "../home/render-container.vue"
+import { ICom } from "@/utils/type"
+
+/* data */
+const curComponentData = ref(<ICom>{})
 
 /* methods */
+// 获取当前组件属性数据
+const setComData = (data: ICom) => {
+  curComponentData.value = data
+}
 </script>
 
 <style scoped lang="scss">

@@ -17,6 +17,9 @@
       <el-form-item label="背景色">
         <el-color-picker v-model="data.background" show-alpha :predefine="predefineColors" />
       </el-form-item>
+      <el-form-item label="置顶">
+        <el-switch v-model="data.topping" inline-prompt active-text="是" inactive-text="否" />
+      </el-form-item>
     </el-form>
   </div>
 </template>

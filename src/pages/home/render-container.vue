@@ -6,12 +6,11 @@
       <img src="../../assets/images/phone-status.png" alt="" class="phone-status-img" />
       <!-- 手机 -->
       <div class="phone-wrap" @drop="onDrop($event)" @dragover="onDrogOver($event)" @dragleave="onDragLeave($event)">
-        <vue-draggable :list="componentList" item-key="id" ghost-class="ghost-class" class="phone-drag__wrap">
+        <draggable :list="componentList" item-key="id" ghost-class="ghost-class" class="phone-drag__wrap">
           <template #item="{ element }">
-            <!-- <component :is="element.componentName"></component> -->
-            {{ element.name }}
+            <component :is="element.componentName" :data="element.style"> </component>
           </template>
-        </vue-draggable>
+        </draggable>
       </div>
     </div>
     <div class="phone-info-wrap">
@@ -22,21 +21,14 @@
 
 <script setup lang="ts">
 import { ref } from "vue"
-import vueDraggable from "vuedraggable"
+import draggable from "vuedraggable"
 import componentProps from "@/utils/componentProps"
-
-/* interface */
-interface ICom {
-  id: string
-  name: string
-  value: string
-  active: boolean //选中状态
-  componentName: string // 对应左侧组件的componentName
-  setName: string // 对应左侧组件的setName
-  style: object
-}
+import { ICom } from "@/utils/type"
 
 /* props */
+
+/* emits */
+const emits = defineEmits(["setComData"])
 
 /* data */
 // 当前将要生成页面的对象
@@ -44,7 +36,7 @@ let pageData = ref({})
 // 拖拽过来的组件列表
 let componentList = ref(<ICom[]>[])
 // 当前拖拽组件数据
-let curComponent = ref({})
+let curComponent = ref(<ICom>{})
 
 /* methods */
 // 当在有效放置目标上放置元素或选择文本时触发此事件
@@ -56,6 +48,9 @@ const onDrop = (e: any) => {
 
   //
   componentList.value.push(comData)
+
+  // 抛出组件属性给父组件，父组件再传给右侧属性组件
+  emits("setComData", comData)
 }
 
 // 当将元素或文本选择拖动到有效放置目标（每几百毫秒）上时，会触发此事件

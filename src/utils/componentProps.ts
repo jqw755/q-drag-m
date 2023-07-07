@@ -29,9 +29,10 @@ componentProps.set("q-search", {
   setName: "q-search-set", // 对应左侧组件的setName
   style: {
     placeholder: "请输入内容",
-    round: false, // 是否圆角
+    shape: "", // 是否圆角 可选值round
     background: "#ffffff",
     readonly: false, // 搜索框是否只读
+    topping: false, // 是否置顶
   },
 })
 
