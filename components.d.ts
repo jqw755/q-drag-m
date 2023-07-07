@@ -7,14 +7,15 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
-    Button: typeof import('./src/components/element/button/index.vue')['default']
     ElButton: typeof import('element-plus/es')['ElButton']
-    ElInput: typeof import('element-plus/es')['ElInput']
-    Input: typeof import('./src/components/element/input/index.vue')['default']
+    ElCollapse: typeof import('element-plus/es')['ElCollapse']
+    ElCollapseItem: typeof import('element-plus/es')['ElCollapseItem']
+    ElIcon: typeof import("element-plus/es")["ElIcon"]
+    ElInput: typeof import("element-plus/es")["ElInput"]
+    QIcon: typeof import('./src/components/q-icon/index.vue')['default']
+    QSearch: typeof import('./src/components/element/q-search/index.vue')['default']
+    QSearchSet: typeof import('./src/components/element/q-search/q-search-set.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
-    Set: typeof import('./src/components/element/input/set.vue')['default']
-    VButton: typeof import('./src/components/element/vButton/index.vue')['default']
-    VButtonAttr: typeof import('./src/components/element/vButton/vButtonAttr.vue')['default']
   }
 }

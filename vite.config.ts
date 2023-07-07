@@ -24,7 +24,16 @@ export default defineConfig({
       "@": fileURLToPath(new URL("./src", import.meta.url)),
     },
   },
+  css: {
+    preprocessorOptions: {
+      scss: {
+        // 全局引入变量// 给导入的路径最后加上 ;
+        additionalData: `@import '@/assets/var.scss';`,
+      },
+    },
+  },
   build: {
+    minify: "terser",
     terserOptions: {
       compress: {
         drop_console: true, // 生产环境去除console
