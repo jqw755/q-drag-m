@@ -15,6 +15,8 @@ declare module 'vue' {
     ElFormItem: typeof import('element-plus/es')['ElFormItem']
     ElIcon: typeof import("element-plus/es")["ElIcon"]
     ElInput: typeof import('element-plus/es')['ElInput']
+    ElOption: typeof import('element-plus/es')['ElOption']
+    ElSelect: typeof import('element-plus/es')['ElSelect']
     ElSwitch: typeof import('element-plus/es')['ElSwitch']
     QIcon: typeof import('./src/components/q-icon/q-icon.vue')['default']
     QSearch: typeof import('./src/components/q-search/q-search.vue')['default']

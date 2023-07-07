@@ -1,13 +1,12 @@
 <template>
   <div class="layout-right__aside">
-    <p class="component-title">搜索框</p>
-
+    <p class="component-title">{{ data.style && data.style.title }}</p>
     <component :is="data.setName" :data="data.style"> </component>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, PropType } from "vue"
+import { PropType } from "vue"
 import { ICom } from "@/utils/type"
 
 /* props */
@@ -23,7 +22,7 @@ const props = defineProps({
 .layout-right__aside {
   width: 400px;
   height: 100%;
-  padding: 5px 0 5px 0;
+  padding: 0 20px;
   border-left: 1px solid $border-color;
   background-color: #fff;
   .component-title {
@@ -32,6 +31,7 @@ const props = defineProps({
     font-size: 18px;
     font-weight: 600;
     color: #323233;
+    margin-bottom: 24px;
   }
 }
 </style>

@@ -3,7 +3,7 @@
     <van-search
       v-model="value"
       :placeholder="data.placeholder"
-      :shape="data.shape"
+      :input-align="data.align"
       :background="data.background"
       :readonly="data.readonly"
     />

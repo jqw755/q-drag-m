@@ -1,24 +1,26 @@
 <!-- 组件属性 -->
 <template>
   <div>
-    <!-- 标题 -->
-    <h2>{{ data.name }}</h2>
-    <!-- 属性修改表单 -->
-    <el-form :model="data" label-width="80px" size="small">
+    <!-- 属性表单 -->
+    <el-form :model="data" label-position="right" label-width="80px">
       <el-form-item label="输入占位">
-        <el-input v-model="data.placeholder" />
+        <el-input v-model="data.placeholder" style="width: 214px" />
       </el-form-item>
-      <el-form-item label="圆角">
-        <el-switch v-model="data.round" inline-prompt active-text="是" inactive-text="否" />
+      <el-form-item label="内容对齐">
+        <el-select v-model="data.align">
+          <el-option label="居左" value="left" />
+          <el-option label="居中" value="center" />
+          <el-option label="居右" value="right" />
+        </el-select>
       </el-form-item>
       <el-form-item label="只读">
         <el-switch v-model="data.readonly" inline-prompt active-text="是" inactive-text="否" />
       </el-form-item>
-      <el-form-item label="背景色">
-        <el-color-picker v-model="data.background" show-alpha :predefine="predefineColors" />
-      </el-form-item>
       <el-form-item label="置顶">
         <el-switch v-model="data.topping" inline-prompt active-text="是" inactive-text="否" />
+      </el-form-item>
+      <el-form-item label="背景色">
+        <el-color-picker v-model="data.background" show-alpha :predefine="predefineColors" />
       </el-form-item>
     </el-form>
   </div>
@@ -52,3 +54,13 @@ const predefineColors = ref([
   "#c7158577",
 ])
 </script>
+
+<style>
+:deep(.el-form) {
+  .el-form-item {
+    .el-form-item__content {
+      text-align: right;
+    }
+  }
+}
+</style>
