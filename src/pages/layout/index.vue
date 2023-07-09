@@ -46,12 +46,16 @@ const setComData = (data: ICom) => {
 }
 .layout-main__ele {
   display: flex;
-  height: calc(100% - 81px);
+  height: calc(100% - 61px);
   .layout-middle__content {
     flex: 1;
     min-width: 500px;
     padding: 0 30px;
     background: $bg-color-primary;
+    overflow-y: auto;
+    &::-webkit-scrollbar {
+      display: none;
+    }
   }
 }
 </style>

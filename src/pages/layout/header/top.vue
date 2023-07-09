@@ -42,7 +42,7 @@ import { ElMessageBox } from "element-plus"
 }
 .layout-top__ele {
   width: 100%;
-  height: 80px;
+  height: 60px;
   padding: 0 24px;
   background: #fff;
   border-bottom: 1px solid $border-color;

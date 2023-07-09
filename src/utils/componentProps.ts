@@ -30,11 +30,13 @@ componentProps.set("q-search", {
   setName: "q-search-set", // 对应左侧组件的setName
   style: {
     title: "搜索框",
+    value: "", // 输入框输入的内容
     placeholder: "请输入内容",
     align: "left", // 是否居中 可选值left right center
     background: "#ffffff",
     readonly: false, // 搜索框是否只读
     topping: false, // 是否置顶
+    eventName: "", // 查询回调
   },
 })
 

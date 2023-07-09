@@ -22,10 +22,16 @@
       <el-form-item label="背景色">
         <el-color-picker v-model="data.background" show-alpha :predefine="predefineColors" />
       </el-form-item>
+      <el-form-item label="事件">
+        <el-select v-model="data.eventName" placeholder="请选择事件">
+          <el-option v-for="ev in eventList" :key="ev.fnName" :label="ev.label" :value="ev.fnName" />
+        </el-select>
+      </el-form-item>
     </el-form>
   </div>
 </template>
 <script setup lang="ts">
+import { reactive } from "vue"
 import { ref } from "vue"
 
 // 组件属性对象
@@ -37,6 +43,7 @@ const props = defineProps({
 })
 
 const color = ref("#ffffff")
+// 预设颜色
 const predefineColors = ref([
   "#ff4500",
   "#ff8c00",
@@ -52,6 +59,14 @@ const predefineColors = ref([
   "hsl(181, 100%, 37%)",
   "hsla(209, 100%, 56%, 0.73)",
   "#c7158577",
+])
+
+// 事件列表
+const eventList = reactive([
+  {
+    fnName: "getList",
+    label: "回车(确认)查询列表",
+  },
 ])
 </script>
 <style>
