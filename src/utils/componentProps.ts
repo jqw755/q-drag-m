@@ -9,6 +9,7 @@ componentProps.set("q-button", {
   active: false, //选中状态
   componentName: "q-button", // 对应左侧组件的componentName
   setName: "q-button-set", // 对应左侧组件的setName
+  onlyOne: false,
   style: {
     title: "按钮",
     width: "",
@@ -28,6 +29,7 @@ componentProps.set("q-search", {
   active: false, //选中状态
   componentName: "q-search", // 对应左侧组件的componentName
   setName: "q-search-set", // 对应左侧组件的setName
+  onlyOne: true, // 只允许存在一个该组件
   style: {
     title: "搜索框",
     value: "", // 输入框输入的内容

@@ -7,8 +7,13 @@
       <!-- 手机 -->
       <div class="phone-wrap" @drop="onDrop($event)" @dragover="onDrogOver($event)" @dragleave="onDragLeave($event)">
         <draggable :list="componentList" item-key="id" ghost-class="ghost-class" class="phone-drag__wrap">
-          <template #item="{ element }">
-            <component :is="element.componentName" :data="element.style"> </component>
+          <template #item="{ element, index }">
+            <el-tooltip raw-content placement="right">
+              <component :is="element.componentName" :data="element.style"> </component>
+              <template #content>
+                <span class="cursor-pointer" @click="onDelComponent(index)">删除</span>
+              </template>
+            </el-tooltip>
           </template>
         </draggable>
       </div>
@@ -21,6 +26,7 @@
 
 <script setup lang="ts">
 import { ref } from "vue"
+// import { ElMessage } from "element-plus"
 import draggable from "vuedraggable"
 import componentProps from "@/utils/componentProps"
 import { ICom } from "@/utils/type"
@@ -44,9 +50,13 @@ const onDrop = (e: any) => {
   // 获取当前拖拽的元素
   const comName = e.dataTransfer.getData("componentName")
   const comData = componentProps.get(comName)
+  // 判断组件唯一性
+  if (comData.onlyOne && componentList.value.some((it) => it.componentName === comData.componentName)) {
+    ElMessage.warning(`${comData.name}只能存在一个`)
+    return
+  }
   curComponent.value = comData
-
-  //
+  // 向componentList push
   componentList.value.push(comData)
 
   // 抛出组件属性给父组件，父组件再传给右侧属性组件
@@ -61,13 +71,19 @@ const onDrogOver = (e: any) => {
 
 // 当拖动的元素或文本选择离开有效的放置目标时，会触发此事件
 const onDragLeave = (e: any) => {}
+
+// 删除组件
+const onDelComponent = (index: number) => {
+  componentList.value.splice(index, 1)
+  curComponent.value = <ICom>{}
+  emits("setComData", {})
+}
 </script>
 
 <style scoped lang="scss">
 .render-container {
   width: 100%;
-  height: 100%;
-  padding-top: 60px;
+  padding: 60px 0;
   position: relative;
   .phone-container {
     width: 375px;
