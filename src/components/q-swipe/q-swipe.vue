@@ -1,15 +1,22 @@
 <template>
   <div :class="{ 'is-topping': data.topping }">
-    <van-swipe :autoplay="3000" indicator-color="white">
-      <van-swipe-item>1</van-swipe-item>
-      <van-swipe-item>2</van-swipe-item>
-      <van-swipe-item>3</van-swipe-item>
-      <van-swipe-item>4</van-swipe-item>
+    <van-swipe
+      :height="data.height"
+      :autoplay="data.autoplay"
+      :loop="data.loop"
+      :showIndicators="data.showIndicators"
+      :indicator-color="data.indicatorColor"
+    >
+      <van-swipe-item v-for="item in data.images" :key="item">
+        <van-image :src="item" fit="contain" width="100%" height="100%">
+          <template v-slot:error>加载失败</template>
+        </van-image>
+      </van-swipe-item>
     </van-swipe>
   </div>
 </template>
 <script lang="ts">
-export default { name: "QSearch" }
+export default { name: "QSwipe" }
 </script>
 <script setup lang="ts">
 import { ref, reactive } from "vue"
@@ -23,24 +30,10 @@ const props = defineProps({
 
 const { data } = props
 
-const onSearch = () => {
-  const evName = data.eventName
-  if (evName) {
-    allEventList[evName] && allEventList[evName]()
-  }
-}
-
 // 事件
 const allEventList = reactive(<any>{
   getList: () => {
-    console.log(`根据${data.value}查询`)
-    alert(`根据${data.value}查询`)
+    console.log(`事件`)
   },
 })
 </script>
-<style>
-.is-topping {
-  position: sticky;
-  top: 0;
-}
-</style>
