@@ -18,7 +18,7 @@ const props = defineProps({
 })
 </script>
 
-<style>
+<style lang="scss">
 .el-form {
   .el-form-item {
     .el-form-item__content {
