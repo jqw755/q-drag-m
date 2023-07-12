@@ -10,6 +10,8 @@ import { ElementPlusResolver, VantResolver } from "unplugin-vue-components/resol
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  // https://cn.vitejs.dev/guide/static-deploy.html
+  base: "/q-drag-m/",
   plugins: [
     vue(),
     AutoImport({
