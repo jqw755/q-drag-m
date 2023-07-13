@@ -1,0 +1,1 @@
+/* empty css              */import{G as t,az as o,o as a,bC as e}from"./main-dae0909e.js";const s=t({name:"QBackTop",props:{data:{type:Object,default:{}}},setup:t=>(s,p)=>{const r=e;return o(),a(r,{right:t.data.right+"vw",bottom:t.data.bottom+"vh",teleport:t.data.teleport,style:{position:"absolute"}},null,8,["right","bottom","teleport"])}});export{s as default};
