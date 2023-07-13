@@ -8,18 +8,18 @@
       <div class="phone-wrap" @drop="onDrop($event)" @dragover="onDrogOver($event)" @dragleave="onDragLeave($event)">
         <draggable :list="componentList" item-key="id">
           <template #item="{ element, index }">
-            <el-tooltip raw-content placement="right">
-              <component
-                :is="element.componentName"
-                :data="element.style"
-                :class="['dynamic-component', { 'component-active': element.active }]"
-                @click="activeComponentEvt(element, index)"
-              >
-              </component>
-              <template #content>
-                <span class="cursor-pointer" @click="onDelComponent(index)">删除</span>
+            <component
+              :is="element.componentName"
+              :data="element.style"
+              :class="['dynamic-component', { 'component-active': element.active }]"
+              @click="activeComponentEvt(element, index)"
+            >
+              <template #delSlot>
+                <span class="del-com-wrap" @click="onDelComponent(index)">
+                  <q-icon name="q-drag-shanchu" color="#000000" />{{ element.name }}
+                </span>
               </template>
-            </el-tooltip>
+            </component>
           </template>
         </draggable>
       </div>
@@ -56,6 +56,7 @@ const onDrop = (e: any) => {
   // 获取当前拖拽的元素
   const comName = e.dataTransfer.getData("componentName")
   const comData = componentProps.get(comName)
+  if (!comData) return
 
   // 清除其余组件样式
   componentList.value.forEach((item) => (item.active = false))
@@ -72,6 +73,12 @@ const onDrop = (e: any) => {
 
   // 抛出组件属性给父组件，父组件再传给右侧属性组件
   emits("setComData", result)
+
+  // 自动滚动到容器底部
+  const phoneWrap = document.getElementsByClassName("phone-wrap")[0]
+  setTimeout(() => {
+    phoneWrap.scrollTop = phoneWrap.scrollHeight
+  }, 0)
 }
 
 // 当将元素或文本选择拖动到有效放置目标（每几百毫秒）上时，会触发此事件
@@ -124,12 +131,28 @@ const onDelComponent = (index: number) => {
         display: none; /* Chrome Safari */
       }
       .dynamic-component {
+        position: relative;
         border: 1px solid #ffffff;
-        &:hover {
-          border: 1px dashed $primary-color;
-        }
         &.component-active {
           border: 2px solid $primary-color;
+        }
+        .del-com-wrap {
+          // display: none;
+          padding: 10px 20px;
+          box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.1);
+          border-radius: 6px;
+          background: #ffffff;
+          cursor: pointer;
+          position: absolute;
+          right: -50px;
+          top: 0;
+          z-index: 10;
+        }
+        &:hover {
+          border: 1px dashed $primary-color;
+          .del-com-wrap {
+            display: inline-block;
+          }
         }
       }
     }

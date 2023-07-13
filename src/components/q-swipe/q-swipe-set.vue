@@ -3,10 +3,14 @@
   <el-form :model="data" label-position="right" label-width="100px">
     <el-form-item label="轮播图片"> </el-form-item>
     <el-form-item label="高度">
-      <el-slider v-model="data.height" :min="100" :max="500" :step="100" />
+      <div class="w-214">
+        <el-slider v-model="data.height" :min="100" :max="500" :step="100" />
+      </div>
     </el-form-item>
     <el-form-item label="轮播间隔">
-      <el-slider v-model="data.autoplay" :min="1000" :max="5000" :step="1000" />
+      <div class="w-214">
+        <el-slider v-model="data.autoplay" :min="1000" :max="5000" :step="1000" />
+      </div>
     </el-form-item>
     <el-form-item label="循环播放">
       <el-switch v-model="data.loop" inline-prompt active-text="是" inactive-text="否" />

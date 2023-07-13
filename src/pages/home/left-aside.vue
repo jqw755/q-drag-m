@@ -27,7 +27,7 @@
 import { ref } from "vue"
 import leftComponentList from "@/utils/leftComponentList"
 // 默认展开的项目
-const activeNames = ref(["1"])
+const activeNames = ref(["1", "2"])
 // 组件列表数组
 const componentList = ref(leftComponentList)
 
@@ -45,6 +45,7 @@ const dragStart = (e: any) => {
   border-left: 1px solid $border-color;
   border-right: 1px solid $border-color;
   background-color: #fff;
+  overflow-y: auto;
 
   :deep(.el-collapse) {
     border-top: 0;
@@ -61,7 +62,7 @@ const dragStart = (e: any) => {
     flex-wrap: wrap;
     .com-item__ele {
       flex-basis: 33%;
-      padding: 15px 0 15px 0;
+      padding: 20px 0;
       cursor: move;
       text-align: center;
       color: #503327;

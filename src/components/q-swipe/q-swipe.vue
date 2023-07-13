@@ -13,6 +13,8 @@
         </van-image>
       </van-swipe-item>
     </van-swipe>
+    <!-- 删除 -->
+    <slot name="delSlot"> </slot>
   </div>
 </template>
 <script lang="ts">

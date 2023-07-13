@@ -9,6 +9,8 @@
       :readonly="data.readonly"
       @search="onSearch"
     />
+    <!-- 删除 -->
+    <slot name="delSlot"> </slot>
   </div>
 </template>
 <script lang="ts">

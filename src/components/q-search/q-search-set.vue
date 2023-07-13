@@ -4,7 +4,7 @@
     <!-- 属性表单 -->
     <el-form :model="data" label-position="right" label-width="80px">
       <el-form-item label="输入占位">
-        <el-input class="w-214" v-model="data.placeholder" clearable />
+        <el-input class="w-214" v-model="data.placeholder" clearable maxlength="200" />
       </el-form-item>
       <el-form-item label="内容对齐">
         <el-select v-model="data.align">
