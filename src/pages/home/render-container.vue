@@ -6,10 +6,16 @@
       <img src="../../assets/images/phone-status.png" alt="" class="phone-status-img" />
       <!-- 手机 -->
       <div class="phone-wrap" @drop="onDrop($event)" @dragover="onDrogOver($event)" @dragleave="onDragLeave($event)">
-        <draggable :list="componentList" item-key="id" ghost-class="ghost-class" class="phone-drag__wrap">
+        <draggable :list="componentList" item-key="id">
           <template #item="{ element, index }">
             <el-tooltip raw-content placement="right">
-              <component :is="element.componentName" :data="element.style"> </component>
+              <component
+                :is="element.componentName"
+                :data="element.style"
+                :class="['dynamic-component', { 'component-active': element.active }]"
+                @click="activeComponentEvt(element, index)"
+              >
+              </component>
               <template #content>
                 <span class="cursor-pointer" @click="onDelComponent(index)">删除</span>
               </template>
@@ -50,6 +56,10 @@ const onDrop = (e: any) => {
   // 获取当前拖拽的元素
   const comName = e.dataTransfer.getData("componentName")
   const comData = componentProps.get(comName)
+
+  // 清除其余组件样式
+  componentList.value.forEach((item) => (item.active = false))
+
   // 判断组件唯一性
   if (comData.onlyOne && componentList.value.some((it) => it.componentName === comData.componentName)) {
     ElMessage.warning(`${comData.name}只能存在一个`)
@@ -57,10 +67,11 @@ const onDrop = (e: any) => {
   }
   curComponent.value = comData
   // 向componentList push
-  componentList.value.push(comData)
+  const result = { ...comData, active: true }
+  componentList.value.push(result)
 
   // 抛出组件属性给父组件，父组件再传给右侧属性组件
-  emits("setComData", comData)
+  emits("setComData", result)
 }
 
 // 当将元素或文本选择拖动到有效放置目标（每几百毫秒）上时，会触发此事件
@@ -71,6 +82,15 @@ const onDrogOver = (e: any) => {
 
 // 当拖动的元素或文本选择离开有效的放置目标时，会触发此事件
 const onDragLeave = (e: any) => {}
+
+// 点击选中组件
+const activeComponentEvt = (ele: ICom, index: number) => {
+  componentList.value.forEach((item) => (item.active = false))
+  ele.active = true
+  curComponent.value = ele
+  componentList.value[index] = ele
+  emits("setComData", ele)
+}
 
 // 删除组件
 const onDelComponent = (index: number) => {
@@ -98,11 +118,19 @@ const onDelComponent = (index: number) => {
       background: #fff;
       overflow-x: hidden;
       overflow-y: auto;
-      .phone-drag__wrap {
-        // pointer-events: none;
+      scrollbar-width: none; /* Firefox */
+      -ms-overflow-style: none; /* IE 10+ */
+      &::-webkit-scrollbar {
+        display: none; /* Chrome Safari */
       }
-      .ghost-class {
-        border: 1px dotted $primary-color;
+      .dynamic-component {
+        border: 1px solid #ffffff;
+        &:hover {
+          border: 1px dashed $primary-color;
+        }
+        &.component-active {
+          border: 2px solid $primary-color;
+        }
       }
     }
   }

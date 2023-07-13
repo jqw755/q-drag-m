@@ -47,7 +47,7 @@ componentProps.set("q-swipe", {
   active: false, //选中状态
   componentName: "q-swipe", // 对应左侧组件的componentName
   setName: "q-swipe-set", // 对应左侧组件的setName
-  onlyOne: true, // 只允许存在一个该组件
+  onlyOne: false,
   style: {
     title: "轮播",
     // 轮播内容(目前仅支持图片)

@@ -37,3 +37,11 @@ const allEventList = reactive(<any>{
   },
 })
 </script>
+
+<style lang="scss">
+.is-topping {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+</style>
